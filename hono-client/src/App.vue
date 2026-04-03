@@ -44,18 +44,5 @@ async function addUser() {
 </script>
 
 <template>
-  <button @click="fetchUsers()">Get all users</button>
-
-  <ul>
-    <li v-for="(user, index) in users" @click="deleteUser(index)">
-      {{ user.toLowerCase() }}
-    </li>
-  </ul>
-
-  <h1>{{ text }}</h1>
-
-  <div>
-    <input type="text" v-model="text" />
-    <button @click="addUser()">Add</button>
-  </div>
+  <RouterView />
 </template>

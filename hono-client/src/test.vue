@@ -6,16 +6,6 @@ import { ref } from 'vue'
 
 <template>
     <div class="min-h-screen bg-[#fbf6e8] flex ">
-        <!-- <div class="min-w-[240px] min-h-screen bg-[#eadfcc]">
-            <div class="h-full flex justify-center">
-                <div class="flex-1 justify-center" >
-                    <h1 class="text-text">Logo</h1>
-                </div>
-                <div class="">
-                    
-                </div>
-            </div>
-        </div>-->
 
         <aside class="w-[240px] min-h-screen bg-[#eadfcc] flex flex-col py-8 px-4 border-r border-[#d9ceb9]">
 
@@ -67,8 +57,10 @@ import { ref } from 'vue'
             <div class="w-[440px] h-[52px] bg-[#ffffff] rounded-4xl cursor-pointer hover:shadow-2xl transition-all border border-secondary"></div>
             
             <div class="flex-row justify-items-end">
-                <hr class="border-2 border-secondary opacity-20 mb-10 mx-2" />
+                <hr class="w-1 h-8 bg-[#d9ceb9] mx-6" />
             </div>
+
+            
         </aside>
     </div>
 </template>
