@@ -1,10 +1,9 @@
-import { Hono } from "hono";
-import { Pool } from 'pg';
+import { Hono } from 'hono'
+import { Pool } from 'pg'
 import bcrypt from 'bcryptjs'
-import jwt from 'jsonwebtoken';
+import jwt from 'jsonwebtoken'
 
-//vlastne mini-router len pre auth
-const auth = new Hono()
+const auth = new Hono()   // ← len toto, žiadne app.route tu
 //New Pool otvori nove pripojenie na databazu pomocou URL z .env
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL

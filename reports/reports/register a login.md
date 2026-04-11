@@ -1,0 +1,1 @@
+Tento tyzden som po dlhom boji dorobil Backend, zial som si to stazil sam tym, ze som zabudol heslo od vlastnej postgres databazy. Zatial je frontend na register/login nulovy, to bude praca na najblizsie
