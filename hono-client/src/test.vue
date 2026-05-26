@@ -18,15 +18,18 @@ import { ref } from 'vue'
             <div class="flex justify-around items-end mb-6 w-full px-2">
                 <div class="flex flex-col items-center gap-1 cursor-pointer group">
                     <span class="text-2xl hover:scale-110 transition-transform duration-200">🏠</span>
-                    <span class="text-[10px] uppercase font-bold text-text opacity-60 group-hover:opacity-100">Home</span>
+                    <span
+                        class="text-[10px] uppercase font-bold text-text opacity-60 group-hover:opacity-100">Home</span>
                 </div>
                 <div class="flex flex-col items-center gap-1 cursor-pointer group">
                     <span class="text-2xl hover:scale-110 transition-transform duration-200">📝</span>
-                    <span class="text-[10px] uppercase font-bold text-text opacity-60 group-hover:opacity-100">New</span>
+                    <span
+                        class="text-[10px] uppercase font-bold text-text opacity-60 group-hover:opacity-100">New</span>
                 </div>
                 <div class="flex flex-col items-center gap-1 cursor-pointer group">
                     <span class="text-2xl hover:scale-110 transition-transform duration-200">📌</span>
-                    <span class="text-[10px] uppercase font-bold text-text opacity-60 group-hover:opacity-100">Pins</span>
+                    <span
+                        class="text-[10px] uppercase font-bold text-text opacity-60 group-hover:opacity-100">Pins</span>
                 </div>
             </div>
 
@@ -35,32 +38,47 @@ import { ref } from 'vue'
             <!-- Cast Playlistov-->
             <div class="flex flex-col gap-10 overflow-y-auto items-center w-full p-4">
                 <div class="flex flex-col items-center w-[140px]">
-                    <div class="w-[120px] h-[120px] bg-secondary rounded-xl cursor-pointer hover:shadow-2xl transition-all hover:scale-105 duration-300"></div>
+                    <div
+                        class="w-[120px] h-[120px] bg-secondary rounded-xl cursor-pointer hover:shadow-2xl transition-all hover:scale-105 duration-300">
+                    </div>
                     <span class="text-[13px] mt-3 text-secondary">Playlist 1</span>
                 </div>
 
                 <div class="flex flex-col items-center w-[140px]">
-                    <div class="w-[120px] h-[120px] bg-[var(--color-primary)] rounded-xl cursor-pointer hover:shadow-2xl transition-all hover:scale-105 duration-300"></div>
-                    <span class="text-[13px] mt-3 font-bold text-[var(--color-accent)] leading-tight">Playlist 2 (aktivny)</span>
+                    <div
+                        class="w-[120px] h-[120px] bg-[var(--color-primary)] rounded-xl cursor-pointer hover:shadow-2xl transition-all hover:scale-105 duration-300">
+                    </div>
+                    <span class="text-[13px] mt-3 font-bold text-[var(--color-accent)] leading-tight">Playlist 2
+                        (aktivny)</span>
                 </div>
 
                 <div class="flex flex-col items-center w-[140px]">
-                    <div class="w-[120px] h-[120px] bg-secondary rounded-xl cursor-pointer hover:shadow-2xl transition-all hover:scale-105 duration-300"></div>
+                    <div
+                        class="w-[120px] h-[120px] bg-secondary rounded-xl cursor-pointer hover:shadow-2xl transition-all hover:scale-105 duration-300">
+                    </div>
                     <span class="text-[13px] mt-3 text-secondary">Playlist 3</span>
                 </div>
             </div>
         </aside>
 
         <!--Cast Header-->
-        <aside class=" min-w-screen h-[100px] bg-[#faf3e0] flex flex-row items-center py-8 px-4 border-r shadow-lg">
-            
-            <div class="w-[440px] h-[52px] bg-[#ffffff] rounded-4xl cursor-pointer hover:shadow-2xl transition-all border border-secondary"></div>
-            
-            <div class="flex-row justify-items-end">
-                <hr class="w-1 h-8 bg-[#d9ceb9] mx-6" />
-            </div>
+        <div class="flex-1 flex flex-col">
+            <header
+                class="h-[72px] bg-[#faf3e0] flex flex-row items-center px-6 border-b border-[#d9ceb9] shadow-sm justify-end">
 
-            
-        </aside>
+                <!-- Search bar -->
+                <div class="w-[440px] h-[52px] bg-white rounded-full border border-[#d9ceb9]"></div>
+
+                <!-- divider -->
+                <div class="w-px h-8 bg-[#d9ceb9] mx-6"></div>
+
+                <!-- Ikony -->
+                <div class="flex items-center gap-4">
+                    <span class="text-xl cursor-pointer">🔔</span>
+                    <div class="w-9 h-9 bg-[#ff8c42] rounded-full opacity-80 cursor-pointer"></div>
+                </div>
+
+            </header>
+        </div>
     </div>
 </template>
