@@ -31,8 +31,7 @@ const router = useRouter()
 
 async function handleLogin() {
   const res = await login(email.value, password.value)
-  if (res.token) {
-    localStorage.setItem('token', res.token)
+  if (res.message) {
     router.push('/')
   } else {
     error.value = res.error

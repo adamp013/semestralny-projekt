@@ -7,7 +7,10 @@ import { sValidator } from '@hono/standard-validator'
 import auth from './auth.js'
 
 const app = new Hono()
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}))
 app.route('/api/auth', auth)
 
 const users = ['Martin', 'Stefan', 'Robert', 'Maros']

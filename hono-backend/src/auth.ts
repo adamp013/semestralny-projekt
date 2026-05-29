@@ -2,8 +2,13 @@ import { Hono } from 'hono'
 import { Pool } from 'pg'
 import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
+import { getCookie } from 'hono/cookie'
 
-const auth = new Hono()   // ← len toto, žiadne app.route tu
+
+type Variables = {
+  user: { id: number, email: string }
+}
+const auth = new Hono<{ Variables: Variables }>()// ← len toto, žiadne app.route tu
 //New Pool otvori nove pripojenie na databazu pomocou URL z .env
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL
@@ -47,7 +52,36 @@ auth.post('/login', async (c) => {
         process.env.JWT_SECRET!,
         { expiresIn: '1h' }
     )
-    return c.json({ token })
+    //Tu sa nastavi cookie s nazvom token, hodnotou tokenu, HttpOnly, Path=/ a Max-Age=3600 sekund (1 hodina)
+    c.header('Set-Cookie', `token=${token}; HttpOnly; Path=/; Max-Age=3600`);
+    return c.json({ message: 'Prihlasenie uspesne' })
+})
+
+auth.post('/logout', (c) => {
+    c.header('Set-Cookie', 'token=; HttpOnly; Path=/; Max-Age=0')
+    return c.json({ message: 'Odhlaseni uspesne' })
+})
+
+//middleware - kontrola tokenu
+const authMiddleware = async (c: any, next: any) => {
+    const token = getCookie(c, 'token')
+    if(!token){
+        return c.json({ error: 'Unathorized' }, 401)
+    }
+    try{
+        const payload = jwt.verify(token, process.env.JWT_SECRET!) as {id: number, email: string}
+        c.set('user', payload)
+        await next()
+    } catch{
+        return c.json({ error: 'Unathorized' }, 401)
+    }
+}
+
+auth.delete('/delete', authMiddleware, async (c) => {
+  const user = c.get('user')
+  await pool.query('DELETE FROM users WHERE id = $1', [user.id])
+  c.header('Set-Cookie', 'token=; HttpOnly; Path=/; Max-Age=0')
+  return c.json({ message: 'Ucet uspesne odstraneny' })
 })
 
 //spristupni tento router pre index.ts
