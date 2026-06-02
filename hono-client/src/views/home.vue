@@ -70,7 +70,6 @@
                 <div class="flex items-center gap-4">
                     <span class="text-xl cursor-pointer">🔔</span>
                     <div class="w-9 h-9 bg-[#ff8c42] rounded-full opacity-80 cursor-pointer" @click="handleLogout"></div>
-                    <div class="w-9 h-9 bg-[#9c0606] rounded-full opacity-80 cursor-pointer" @click="handleDeleteAccount"></div>
                 </div>
 
             </header>

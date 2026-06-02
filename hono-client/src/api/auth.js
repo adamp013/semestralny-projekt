@@ -38,3 +38,10 @@ export async function deleteAccount(){
     })
     return res.json()
 }
+
+export async function getUsers(){
+    const res = await fetch(`${API}/api/auth/admin/users`,{
+        credentials: 'include'
+    })
+    return res.json()
+}

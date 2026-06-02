@@ -44,6 +44,10 @@ defineEmits(['click'])
 .btn--secondary { background: #6d6875; color: white; }
 .btn--danger   { background: #ef4444; color: white; }
 
+.btn--primary:hover  { background: #e6753a; }
+.btn--secondary:hover { background: #5a5263; }
+.btn--danger:hover   { background: #dc2626; }
+
 .btn--sm { padding: 6px 12px; font-size: 13px; }
 .btn--md { padding: 10px 18px; font-size: 15px; }
 .btn--lg { width: 100%; padding: 14px 24px; font-size: 17px; justify-content: center; }

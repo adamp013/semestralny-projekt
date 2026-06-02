@@ -17,6 +17,15 @@ const routes = [
   {
   path: '/test',
   component: () => import('../test.vue')
+  },
+  {
+  path: '/admin',
+  component: () => import('../views/AdminDashboard.vue'),
+  meta: { requiresAuth: true }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    component: () => import('../views/NotFound.vue')
   }
 ]
 
@@ -26,8 +35,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const tokken = document.cookie.includes('token')
-  if(to.meta.requiresAuth && !tokken){
+  const isLoggedIn = document.cookie.includes('isLoggedIn=true')
+  if(to.meta.requiresAuth && !isLoggedIn){
     return '/sign-in'
   }
 })

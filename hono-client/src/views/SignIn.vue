@@ -30,7 +30,9 @@ const error = ref('')
 const router = useRouter()
 
 async function handleLogin() {
+  console.log('handleLogin zavolany', email.value, password.value)
   const res = await login(email.value, password.value)
+  console.log('odpoved zo servera', res)
   if (res.message) {
     router.push('/')
   } else {
