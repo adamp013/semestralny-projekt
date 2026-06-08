@@ -1,7 +1,15 @@
 <script setup>
 import { ref } from 'vue'
+import { useAuthStore } from '@/stores/authStore.js'
+import { onMounted } from 'vue'
 
 const users = ref([])
+
+const authStore = useAuthStore()
+
+onMounted(async () => {
+  await authStore.fetchMe()
+})
 
 async function fetchUsers() {
   const response = await fetch('http://localhost:3000/users')

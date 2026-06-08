@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '../stores/authStore.js'
 
 const routes = [
   {
@@ -21,7 +22,7 @@ const routes = [
   {
   path: '/admin',
   component: () => import('../views/AdminDashboard.vue'),
-  meta: { requiresAuth: true }
+  meta: { requiresAuth: true, requiresAdmin: true }
   },
   {
     path: '/:pathMatch(.*)*',
@@ -34,10 +35,16 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to) => {
-  const isLoggedIn = document.cookie.includes('isLoggedIn=true')
-  if(to.meta.requiresAuth && !isLoggedIn){
+router.beforeEach(async (to) => {
+  const authStore = useAuthStore()
+  if (!authStore.isLoggedIn) {
+    await authStore.fetchMe()
+  }
+  if (to.meta.requiresAuth && !authStore.isLoggedIn) {
     return '/sign-in'
+  }
+  if (to.meta.requiresAdmin && authStore.user?.role !== 'admin') { 
+    return '/'
   }
 })
 
