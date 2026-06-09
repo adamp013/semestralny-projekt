@@ -11,7 +11,7 @@ import { join } from 'path'
 type Variables = {
     user: { id: number, email: string, role: string }
 }
-const auth = new Hono<{ Variables: Variables }>()// ← len toto, žiadne app.route tu
+const auth = new Hono<{ Variables: Variables }>()
 //New Pool otvori nove pripojenie na databazu pomocou URL z .env
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL

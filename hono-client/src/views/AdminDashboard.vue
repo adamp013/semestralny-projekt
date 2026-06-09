@@ -1,5 +1,5 @@
 <template>
-  <div class="p-8">
+  <div class="p-8 bg-[#fbf6e8] min-h-screen"" >
     <h1 class="text-2xl font-bold mb-6">Admin Dashboard</h1>
 
     <!-- Users -->

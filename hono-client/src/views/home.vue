@@ -2,7 +2,7 @@
     <div class="min-h-screen bg-[#fbf6e8] flex">
 
         <!-- Sidebar -->
-        <aside class="w-[240px] min-h-screen bg-[#eadfcc] flex flex-col py-8 px-4 border-r border-[#d9ceb9]">
+        <aside class="w-[300px] min-h-screen bg-[#eadfcc] flex flex-col py-8 px-4 border-r border-[#d9ceb9]">
             <div class="flex items-center justify-center gap-3 mb-10 w-full">
                 <div class="w-10 h-10 bg-[#ff8c42] rounded-full opacity-80 shrink-0"></div>
                 <h1 class="text-2xl font-bold text-orange-600">Logo</h1>
@@ -24,12 +24,9 @@
                         class="bg-[#ff8c42] text-white px-2 rounded text-sm">OK</button>
                 </div>
 
-                <div v-for="playlist in playlists" :key="playlist.id"
-                    class="flex flex-col items-center w-[140px] cursor-pointer" @click="selectPlaylist(playlist)">
-                    <div :class="['w-[120px] h-[120px] rounded-xl hover:shadow-2xl transition-all hover:scale-105 duration-300',
-                        selectedPlaylist?.id === playlist.id ? 'bg-[#ff8c42]' : 'bg-[#8c8a9e]']">
-                    </div>
-                    <span class="text-[13px] mt-3 text-center">{{ playlist.name }}</span>
+                <div class="flex flex-col gap-4 overflow-y-auto items-center w-full p-4">
+                    <PlaylistCard v-for="playlist in playlists" :key="playlist.id" :name="playlist.name"
+                        :selected="selectedPlaylist?.id === playlist.id" @click="selectPlaylist(playlist)" />
                 </div>
             </div>
         </aside>
@@ -42,9 +39,7 @@
                 class="h-[72px] bg-[#faf3e0] flex items-center px-6 border-b border-[#d9ceb9] shadow-sm justify-between">
                 <!-- Search -->
                 <div class="relative w-[440px]">
-                    <input v-model="searchQuery" @input="handleSearch" placeholder="Hľadaj piesne..."
-                        class="w-full h-[44px] px-5 rounded-full border border-[#d9ceb9] bg-white focus:outline-none focus:ring-2 focus:ring-[#ff8c42]" />
-                    <!-- Search výsledky -->
+                    <BaseInput v-model="searchQuery" placeholder="Hľadaj piesne..." @input="handleSearch" />
                     <div v-if="searchResults.length"
                         class="absolute top-12 left-0 w-full bg-white border border-[#d9ceb9] rounded-xl shadow-lg z-10">
                         <div v-for="song in searchResults" :key="song.id"
@@ -105,8 +100,8 @@
                 <audio :src="`http://localhost:3000/api/auth/songs/stream/${currentSong.id}`" controls class="flex-1"
                     :key="currentSong.id">
                 </audio>
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -116,6 +111,8 @@ import { useRouter } from 'vue-router'
 import { logout } from '../api/auth.js'
 import { useAuthStore } from '@/stores/authStore.js'
 import { getPlaylists, createPlaylist, getPlaylistSongs, addSongToPlaylist, searchSongs } from '../api/auth.js'
+import BaseInput from '@/components/ui/BaseInput.vue'
+import PlaylistCard from '@/components/PlaylistCard.vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -136,6 +133,12 @@ function formatDuration(seconds) {
 }
 
 async function handleLogout() {
+    await logout()
+    authStore.clearUser()
+    router.push('/sign-in')
+}
+
+async function handleDelete(){
     await logout()
     authStore.clearUser()
     router.push('/sign-in')
